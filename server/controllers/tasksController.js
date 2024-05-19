@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
 const Task = require('../models/taskModel');
-const {createCustomError} = require('../errors/customError');
+const asyncHandler = require('express-async-handler');
+const { createCustomError } = require('../errors/customError');
 
 const getAllTasks = asyncHandler(async (req,res,next) => {
     const tasks = await Task.find({});

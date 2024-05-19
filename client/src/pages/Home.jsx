@@ -1,11 +1,11 @@
 import React from 'react'
-import Input from '../components/Input'
+import CreateTask from '../components/CreateTask'
 import Tasks from '../components/Tasks'
 
 const Home = () => {
   return (
     <main>
-        <Input/>
+        <CreateTask/>
         <Tasks/>
     </main>
   )
