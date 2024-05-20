@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Task from './Task';
-import { fetchTasks } from '../api/index';
+import { TasksContext } from '../context/TasksContext';
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-
-    const getTasks = async () => {
-      const data = await fetchTasks();
-      setTasks(data.tasks);
-      console.log(data.tasks);
-    }
-
-    getTasks();
-
-  },[]);
+  const {tasks} = useContext(TasksContext);
 
   return (
     <section className='tasks-container'>
