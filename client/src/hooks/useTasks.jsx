@@ -22,13 +22,13 @@ export const useTasks = () => {
     try {
       const response = await api.post('/', { name: taskName });
       if (response && response.data) {
-        console.log(response, 'response in create task');
         setTasks((prevTasks) => [...prevTasks, response.data.task]);
         return response.data.task;
       }
     } 
     catch (err) {
       console.error('Error creating task:', err);
+      return err;
     }
   };
 
@@ -45,9 +45,25 @@ export const useTasks = () => {
     }
   };
 
+  const fetchTask = async (taskId) => {
+    try {
+      const resposne = await api.get(`/${taskId}`);
+      if (resposne && resposne.data) {
+        return resposne.data.task;
+      }
+    } 
+    catch (err) {
+      console.error('Error fetching task:', err);
+    }
+  }
+
+  const updateTask = async (taskId) => {
+
+  }
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  return { tasks, createTask, deleteTask };
+  return { tasks, createTask, fetchTask, deleteTask};
 };

@@ -138,6 +138,7 @@ main{
                             font-weight: 600;
                             text-align: center;
                             padding: 0.5em 1em;
+                            border-radius: 16px;
                             color: white;  
                             cursor: pointer; 
                             &:nth-child(1){
@@ -197,17 +198,17 @@ main{
         .btn-container{
             display: flex;
             button{
-                margin-inline: 1rem;
-                min-width: fit-content;                                                                                
+                cursor: pointer; 
                 flex: 1;        
+                min-width: fit-content;                                                                                
                 font-size: 1.5rem;
                 font-weight: 600;
                 text-align: center;
+                border-radius: 24px;
+                margin-inline: 1rem;
                 padding: 0.5em 1em;
                 color: white;  
-                cursor: pointer; 
                 background-color: rgb(111, 111, 238);
-                border-radius: 24px;
                 &:last-child{
                     background: transparent;
                     border: 2px rgb(111, 111, 238) solid;

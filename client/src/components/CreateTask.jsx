@@ -3,22 +3,22 @@ import { TasksContext } from "../context/TasksContext";
 
 const Input = () => {
   const {createTask} = useContext(TasksContext);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({msg: 'ERROR', activated: false});
 
   const addTask = async (e) => {
     e.preventDefault();
     const taskName = e.target[0].value;
     if (!taskName || taskName.trim() === '') {
-      setError(true);
+      setError({msg: 'type a name', activated: true});
       return;
     } 
     else {
       const data = await createTask(taskName);
-      if (!data) {
-        setError(true);
+      if (data instanceof Error) {
+        setError({msg: data.response.data.msg, activated: true});
         return;
       }
-      setError(false);
+      setError({activated: false});
       e.target[0].value = '';
     }
   }
@@ -31,7 +31,7 @@ const Input = () => {
             <input type="text"/>
             <button>Submit</button>
           </form>
-          {error && <span>ERROR</span>}
+          {error.activated && <span>{error.msg}</span>}
         </div>      
     </section>
   )

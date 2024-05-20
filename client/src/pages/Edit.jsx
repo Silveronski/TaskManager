@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
-const testTask = {
-  id: 123
-};
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Edit = () => {
-  const [task, setTask] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { task } = location.state || {};
+
+  useEffect(() => {
+    !task && navigate("/");
+  },[task, navigate])
 
   return (
     <section className='edit-container'>
@@ -16,17 +17,17 @@ const Edit = () => {
         <form>
           <div>
             <label>Task ID</label>
-            <input type="text" value={testTask.id} disabled/>
+            <input type="text" value={task?._id} disabled/>
           </div>
 
           <div>
             <label>Name</label>
-            <input type="text"/>
+            <input type="text" defaultValue={task?.name}/>
           </div>
 
           <div>
             <label htmlFor="exampleCheckbox">Completed</label>
-            <input type="checkbox" id="exampleCheckbox"/>
+            <input type="checkbox" id="exampleCheckbox" defaultChecked={task?.isCompleted}/>
           </div>       
         </form>
         <div className="btn-container">
