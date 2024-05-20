@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 const api = axios.create({
     baseURL: 'http://localhost:3000/api/v1/tasks'
 });
@@ -12,12 +11,9 @@ export const useTasks = () => {
   const fetchTasks = async () => { 
     try {
       const response = await api.get('/');
-      if (response && response.data) {
-        setTasks(response.data.tasks);
-      } else {
-        setTasks([]);
-      }
-    } catch (err) {
+      response && response.data ? setTasks(response.data.tasks) : setTasks([]);
+    } 
+    catch (err) {
       console.error('Error fetching tasks:', err);
     }
   };
@@ -26,10 +22,26 @@ export const useTasks = () => {
     try {
       const response = await api.post('/', { name: taskName });
       if (response && response.data) {
-        setTasks((prevTasks) => [...prevTasks, response.data]);
+        console.log(response, 'response in create task');
+        setTasks((prevTasks) => [...prevTasks, response.data.task]);
+        return response.data.task;
       }
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error creating task:', err);
+    }
+  };
+
+  const deleteTask = async (taskId) => {
+    try {
+      const response = await api.delete(`/${taskId}`);
+      if (response && response.data) {
+        setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+        return response.data.task;
+      }
+    } 
+    catch (err) {
+      console.error('Error deleting task:', err);
     }
   };
 
@@ -37,6 +49,5 @@ export const useTasks = () => {
     fetchTasks();
   }, []);
 
-  return { tasks, createTask };
+  return { tasks, createTask, deleteTask };
 };
-

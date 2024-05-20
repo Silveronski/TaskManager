@@ -1,9 +1,8 @@
 import { useContext, useState } from "react"
 import { TasksContext } from "../context/TasksContext";
-import { createTask } from "../hooks/useTasks";
 
 const Input = () => {
-  const {tasks, setTasks} = useContext(TasksContext);
+  const {createTask} = useContext(TasksContext);
   const [error, setError] = useState(false);
 
   const addTask = async (e) => {
@@ -19,9 +18,7 @@ const Input = () => {
         setError(true);
         return;
       }
-      console.log(data);
       setError(false);
-      setTasks(data.tasks);
       e.target[0].value = '';
     }
   }

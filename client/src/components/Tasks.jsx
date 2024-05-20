@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Task from './Task';
+import React, { useContext } from 'react';
 import { TasksContext } from '../context/TasksContext';
+import Task from './Task';
 
 const Tasks = () => {
   const {tasks} = useContext(TasksContext);
@@ -11,7 +11,7 @@ const Tasks = () => {
         <h2>Tasks:</h2>
         <div className="tasks-content">
           {tasks && tasks.map((task) => (
-            <Task key={task._id} taskName={task.name}/>
+            <Task key={task._id} taskId={task._id} taskName={task.name} isCompleted={task.isCompleted}/>
           ))}
         </div>
       </div>    

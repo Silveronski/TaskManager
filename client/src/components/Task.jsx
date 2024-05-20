@@ -1,9 +1,13 @@
-const Task = ({taskName,taskId}) => {
+import React, { useContext } from 'react';
+import { TasksContext } from '../context/TasksContext';
+
+const Task = ({taskId, taskName, isCompleted}) => {
+  const {deleteTask} = useContext(TasksContext);
   return (
     <div className='task'>
-      <span>{taskName}</span>
+      <span className={`${isCompleted ? 'completed' : ''}`}>{taskName}</span>
       <div className='btn-container'>
-        <button>Delete</button>
+        <button onClick={() => deleteTask(taskId)}>Delete</button>
         <button>Edit</button>
       </div>       
     </div>
