@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TasksContext } from '../context/TasksContext';
+import TaskFormFields from '../components/TaskFormFields';
 
 const Edit = () => {
   const navigate = useNavigate();
@@ -15,9 +16,9 @@ const Edit = () => {
 
   const editTask = async (e) => {
     e.preventDefault();
-    const name = e.target[1].value;
+    const name = e.target[1].value.trim();
     const isCompleted = e.target[2].checked;
-    if (!name || name.trim() === '') {
+    if (!name) {
       setError({msg: 'type a name', activated: true});
       return;
     }
@@ -34,25 +35,12 @@ const Edit = () => {
       <div className="edit-wrapper">
         <h1>Edit task</h1>
         <form onSubmit={editTask}>
-          <div>
-            <label>Task ID</label>
-            <input type="text" value={task?._id} disabled/>
-          </div>
-
-          <div>
-            <label>Name</label>
-            <input type="text" defaultValue={task?.name}/>
-            {error.activated && <div className='error'>{error.msg}</div>}
-          </div>
-
-          <div>
-            <label htmlFor="exampleCheckbox">Completed</label>
-            <input type="checkbox" id="exampleCheckbox" defaultChecked={task?.isCompleted}/>
-          </div>  
-
+          <TaskFormFields text='Task ID' inputType='text' inputValue={task?._id} disabled={true}/>   
+          <TaskFormFields text='Name' inputType='text' inputValue={task?.name} error={error.activated ? error.msg : null}/> 
+          <TaskFormFields text='Completed' inputType='checkbox' inputValue={task?.isCompleted}/>   
           <div className="btn-container">
-            <button type='submit'>Edit</button>
-            <button onClick={() => navigate("/")}>Back to tasks</button>
+            <button>Edit</button>
+            <button type='button' onClick={() => navigate("/")}>Back to tasks</button>
           </div>    
         </form>
       </div>

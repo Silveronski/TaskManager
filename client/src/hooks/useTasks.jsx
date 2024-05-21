@@ -21,7 +21,7 @@ export const useTasks = () => {
   const createTask = async (taskName) => {
     try {
       const response = await api.post('/', { name: taskName });
-      if (response && response.data) {
+      if (response?.data) {
         setTasks((prevTasks) => [...prevTasks, response.data.task]);
         return response.data.task;
       }
@@ -35,7 +35,7 @@ export const useTasks = () => {
   const fetchTask = async (taskId) => {
     try {
       const resposne = await api.get(`/${taskId}`);
-      if (resposne && resposne.data) {
+      if (resposne?.data) {
         return resposne.data.task;
       }
     } 
@@ -47,7 +47,7 @@ export const useTasks = () => {
   const updateTask = async (taskId, updatedTask) => {
     try {
       const response = await api.patch(`/${taskId}`, updatedTask);
-      if (response && response.data) {
+      if (response?.data) {
         setTasks((prevTasks) => prevTasks.map((task) => task._id === taskId ? response.data.task : task));
       }   
       return response.data.task;
@@ -61,7 +61,7 @@ export const useTasks = () => {
   const deleteTask = async (taskId) => {
     try {
       const response = await api.delete(`/${taskId}`);
-      if (response && response.data) {
+      if (response?.data) {
         setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
         return response.data.task;
       }

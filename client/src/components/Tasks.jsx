@@ -3,7 +3,7 @@ import { TasksContext } from '../context/TasksContext';
 import Task from './Task';
 
 const Tasks = () => {
-  const {tasks} = useContext(TasksContext);
+  const { tasks } = useContext(TasksContext);
 
   return (
     <section className='tasks-container'>
