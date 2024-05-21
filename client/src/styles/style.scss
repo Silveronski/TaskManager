@@ -4,7 +4,6 @@
     }
 }
 
-
 *{
     font-family: sans-serif;
 }
@@ -179,12 +178,9 @@ main{
         }
         form{
             div{               
-                margin-block: 2.5rem;
-                &:last-child{
-                    input{
-                       
-                    }
-                } 
+                &:not(:last-child){
+                    margin-block: 2.5rem;
+                }
                 input{
                     font-size: 2rem;                                  
                 }
@@ -193,10 +189,17 @@ main{
                     min-width: 250px;
                     font-size: 2rem;
                 }
+                .error{
+                    color: red;
+                    font-size: 1.5rem;
+                    margin-top: 1rem;
+                    margin-left: 39.2%;
+                }
             }
         }
         .btn-container{
-            display: flex;
+            display: flex; 
+            margin-top: 3rem;         
             button{
                 cursor: pointer; 
                 flex: 1;        
